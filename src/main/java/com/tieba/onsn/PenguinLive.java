@@ -16,6 +16,7 @@ import java.io.IOException;
 public class PenguinLive {
     public static final Font YaHei = new Font("微软雅黑", Font.BOLD, 15);
     private MainFrame mainFrame = new MainFrame();
+    private Settings settings = new Settings();
 
     private PenguinLive() throws IOException {
     }

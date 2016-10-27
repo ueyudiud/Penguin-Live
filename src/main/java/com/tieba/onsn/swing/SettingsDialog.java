@@ -51,7 +51,7 @@ class SettingsDialog extends JDialog {
         xBox1.add(fileButton);
         xBox1.add(Box.createHorizontalStrut(5));
         field1.setPreferredSize(new Dimension(400, 25));
-        field1.setText("F2");
+        field2.setText("F2");
 
         Box XBox2 = Box.createHorizontalBox();
         Box XBox4 = Box.createHorizontalBox();
