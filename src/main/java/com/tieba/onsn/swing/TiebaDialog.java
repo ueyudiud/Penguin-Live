@@ -56,13 +56,7 @@ class TiebaDialog extends JDialog {
         YBox.add(Box.createVerticalStrut(20));
         YBox.add(XBox3);
 
-        yes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TiebaDialog.this.setVisible(false);
-
-            }
-        });
+        yes.addActionListener(e -> TiebaDialog.this.setVisible(false));
 
         mainPanel.add(YBox);
 

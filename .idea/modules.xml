@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PENGUIN-Live.iml" filepath="$PROJECT_DIR$/.idea/modules/PENGUIN-Live.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PENGUIN-Live_main.iml" filepath="$PROJECT_DIR$/.idea/modules/PENGUIN-Live_main.iml" group="PENGUIN-Live" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PENGUIN-Live_test.iml" filepath="$PROJECT_DIR$/.idea/modules/PENGUIN-Live_test.iml" group="PENGUIN-Live" />
     </modules>
   </component>
 </project>

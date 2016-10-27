@@ -3,12 +3,22 @@ version '1.0'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.dll'])
+
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.tieba.onsn.PenguinLive'
+        attributes 'Class-Path': 'libs'
+    }
 }

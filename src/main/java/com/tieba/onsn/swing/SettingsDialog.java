@@ -5,8 +5,6 @@ import com.tieba.onsn.PenguinLive;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -85,18 +83,15 @@ class SettingsDialog extends JDialog {
             public void keyReleased(KeyEvent e) {
                 int code = e.getKeyCode();
                 String key = KeyEvent.getKeyText(code);
-                System.out.println(code);
                 field2.setText(key);
+                MainFrame.hotKey = code;
             }
         });
-        fileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int returnV = jFileChooserX.showOpenDialog(SettingsDialog.this);
-                if (returnV == JFileChooserX.APPROVE_OPTION) {
-                    File file = jFileChooserX.getSelectedFile();
-                    field1.setText(file.getPath());
-                }
+        fileButton.addActionListener(e -> {
+            int returnV = jFileChooserX.showOpenDialog(SettingsDialog.this);
+            if (returnV == JFileChooserX.APPROVE_OPTION) {
+                File file = jFileChooserX.getSelectedFile();
+                field1.setText(file.getPath());
             }
         });
 
