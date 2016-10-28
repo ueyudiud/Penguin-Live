@@ -2,6 +2,7 @@ package com.tieba.onsn.swing;
 
 import com.tieba.onsn.PenguinLive;
 
+import static com.tieba.onsn.PenguinLive.log;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -17,7 +18,9 @@ class TiebaDialog extends JDialog {
 
     TiebaDialog(JFrame owner) {
         super(owner, "登录");
+        log.addLog("创建贴吧提示框中...");
         setSize(450, 250);
+
         JPanel mainPanel = new JPanel();
         mainPanel.setBorder(new EmptyBorder(25, 25, 25, 25));
         setModal(true);
@@ -57,6 +60,7 @@ class TiebaDialog extends JDialog {
         YBox.add(XBox3);
 
         yes.addActionListener(e -> {
+            log.addLog("按下了：贴吧提示框确认按钮。");
             TiebaDialog.this.setVisible(false);
             PenguinLive.settings.setSettings("BDUSS", field1.getText());
             PenguinLive.settings.setSettings("page", field2.getText());
@@ -66,5 +70,6 @@ class TiebaDialog extends JDialog {
         mainPanel.add(YBox);
 
         getContentPane().add(mainPanel);
+        log.addLog("创建贴吧提示框完毕。");
     }
 }

@@ -3,6 +3,7 @@ package com.tieba.onsn.swing;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import static com.tieba.onsn.PenguinLive.log;
 
 /**
  * Created by Onsn on 2016/10/27.

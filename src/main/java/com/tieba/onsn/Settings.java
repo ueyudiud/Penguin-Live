@@ -3,6 +3,7 @@ package com.tieba.onsn;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import static com.tieba.onsn.PenguinLive.log;
 
 /**
  * Created by Onsn on 2016/10/27.
@@ -15,6 +16,7 @@ public class Settings {
     private File settingsINI = new File("settings.ini");
 
     Settings () {
+        log.addLog("读取设置中...");
         if (!settingsINI.isFile()) {
             try {
                 settingsINI.createNewFile();
@@ -31,6 +33,7 @@ public class Settings {
             }
         }
         readAll();
+        log.addLog("读取设置完毕。");
     }
     private BufferedWriter getWriter () {
         try {

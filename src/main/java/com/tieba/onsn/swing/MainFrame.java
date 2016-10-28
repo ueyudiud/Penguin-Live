@@ -2,7 +2,7 @@ package com.tieba.onsn.swing;
 
 import com.melloware.jintellitype.JIntellitype;
 import com.tieba.onsn.PenguinLive;
-
+import static com.tieba.onsn.PenguinLive.log;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -21,12 +21,14 @@ public class MainFrame extends JFrame {
 
     public MainFrame () throws IOException {
         super("Penguin Live");
+        log.addLog("创建主面板中...");
         setSize(550, 650);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         //--------------------
 
+        log.addLog("创建主面板：创建组件中...");
         JPanel downPanel = new JPanel(new BorderLayout());
         downPanel.setBorder(new EmptyBorder(0, 50, 0, 50));
         downPanel.setPreferredSize(new Dimension(450, 300));
@@ -97,14 +99,22 @@ public class MainFrame extends JFrame {
 
         sendButton.addActionListener(e -> {
             String s = textArea.getText().replaceAll("\n", " [br] ");
-            System.out.println(s);
             textArea.setText(null);
+            log.addLog("将要发出：" + s);
         });
-        tiebaButton.addActionListener(e -> tiebaDialog.setVisible(true));
-        settingsButton.addActionListener((e) -> settingsDialog.setVisible(true));
+        tiebaButton.addActionListener(e -> {
+            log.addLog("贴吧提示框...");
+            tiebaDialog.setVisible(true);
+        });
+        settingsButton.addActionListener((e) -> {
+            log.addLog("设置提示框...");
+            settingsDialog.setVisible(true);
+
+        });
 
         JIntellitype.getInstance().registerHotKey(0, 0, Integer.parseInt(PenguinLive.settings.getSettings("hotKey")));
         JIntellitype.getInstance().addHotKeyListener(identifier -> {
+            log.addLog("触发了：全局热键。");
             if (identifier == 0) {
                 try {
                     Thread.sleep(500);
@@ -117,6 +127,7 @@ public class MainFrame extends JFrame {
 
             }
         });
+        log.addLog("创建主面板完毕。");
     }
     private class ImgPanel extends JPanel {
         Image img;

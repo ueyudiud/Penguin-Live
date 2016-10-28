@@ -4,6 +4,7 @@ import com.tieba.onsn.PenguinLive;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import static com.tieba.onsn.PenguinLive.log;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -19,6 +20,7 @@ class SettingsDialog extends JDialog {
     private boolean hotKey = false;
     SettingsDialog(JFrame owner) {
         super(owner, "登录");
+        log.addLog("创建设置提示框中...");
         setSize(450, 250);
         JPanel mainPanel = new JPanel();
         mainPanel.setBorder(new EmptyBorder(25, 25, 25, 25));
@@ -73,6 +75,7 @@ class SettingsDialog extends JDialog {
         YBox.add(XBox3);
 
         yes.addActionListener(e -> {
+            log.addLog("按下了：设置提示框确认按钮。");
             if (hotKey) {
                 JOptionPane.showMessageDialog(this, "重启后热键生效。");
                 hotKey = false;
@@ -96,9 +99,11 @@ class SettingsDialog extends JDialog {
                 field2.setText(key);
                 codey = code;
                 hotKey = true;
+                log.addLog("热键为：" + key);
             }
         });
         fileButton.addActionListener(e -> {
+            log.addLog("创建文件选择面板。");
             int returnV = jFileChooserX.showOpenDialog(SettingsDialog.this);
             if (returnV == JFileChooserX.APPROVE_OPTION) {
                 File file = jFileChooserX.getSelectedFile();
