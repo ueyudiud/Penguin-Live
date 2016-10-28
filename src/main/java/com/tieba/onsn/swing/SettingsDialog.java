@@ -15,7 +15,7 @@ import java.io.File;
  * @author OnSN
  */
 class SettingsDialog extends JDialog {
-
+    private int codey = 113;
     SettingsDialog(JFrame owner) {
         super(owner, "登录");
         setSize(450, 250);
@@ -71,7 +71,12 @@ class SettingsDialog extends JDialog {
         YBox.add(Box.createVerticalStrut(20));
         YBox.add(XBox3);
 
-        yes.addActionListener(e -> SettingsDialog.this.setVisible(false));
+        yes.addActionListener(e -> {
+            SettingsDialog.this.setVisible(false);
+            PenguinLive.settings.setSettings("screenShot", field1.getText());
+            PenguinLive.settings.setSettings("hotKey", String.valueOf(codey));
+            PenguinLive.settings.writeAll();
+        });
 
         mainPanel.add(YBox);
 
@@ -84,6 +89,7 @@ class SettingsDialog extends JDialog {
                 int code = e.getKeyCode();
                 String key = KeyEvent.getKeyText(code);
                 field2.setText(key);
+                codey = code;
                 MainFrame.hotKey = code;
             }
         });
