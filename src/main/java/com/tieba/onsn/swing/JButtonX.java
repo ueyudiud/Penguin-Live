@@ -1,14 +1,15 @@
 package com.tieba.onsn.swing;
-
 import javax.swing.*;
+import static com.tieba.onsn.PenguinLive.log;
 import java.beans.ConstructorProperties;
+
 
 /**
  * Created by Onsn on 2016/10/26.
  *
  * @author OnSN
  */
-public class JButtonX extends JButton {
+class JButtonX extends JButton {
     /**
      * Creates a button with no set text or icon.
      */

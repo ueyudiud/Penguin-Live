@@ -4,11 +4,11 @@ import com.tieba.onsn.PenguinLive;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import static com.tieba.onsn.PenguinLive.log;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 /**
  * Created by Onsn on 2016/10/25.
@@ -16,9 +16,11 @@ import java.awt.event.KeyEvent;
  * @author OnSN
  */
 class SettingsDialog extends JDialog {
-
+    private int codey = 113;
+    private boolean hotKey = false;
     SettingsDialog(JFrame owner) {
         super(owner, "登录");
+        log.addLog("创建设置提示框中...");
         setSize(450, 250);
         JPanel mainPanel = new JPanel();
         mainPanel.setBorder(new EmptyBorder(25, 25, 25, 25));
@@ -33,28 +35,33 @@ class SettingsDialog extends JDialog {
         label2.setFont(PenguinLive.YaHei);
 
 
-        JTextField field1 = new JTextField(15);
-        JTextField field2 = new JTextField(4);
+        JTextField field1 = new JTextField(18);
+        JTextField field2 = new JTextField(2);
 
         field1.setFont(PenguinLive.YaHei);
         field2.setFont(PenguinLive.YaHei);
 
         JButtonX fileButton = new JButtonX("...");
+        JFileChooserX jFileChooserX = new JFileChooserX();
         fileButton.setPreferredSize(new Dimension(48, 24));
         JButtonX yes = new JButtonX("确定");
         yes.setPreferredSize(new Dimension(200, 100));
 
         Box xBox1 = Box.createHorizontalBox();
-        xBox1.add(Box.createHorizontalStrut(10));
+        xBox1.add(Box.createHorizontalStrut(5));
         xBox1.add(label1);
         xBox1.add(field1);
         xBox1.add(fileButton);
-        xBox1.add(Box.createHorizontalStrut(10));
+        xBox1.add(Box.createHorizontalStrut(5));
+        field1.setPreferredSize(new Dimension(400, 25));
+        field2.setText("F2");
 
         Box XBox2 = Box.createHorizontalBox();
+        Box XBox4 = Box.createHorizontalBox();
+        XBox4.add(label2);
+        XBox4.add(field2);
         XBox2.add(Box.createHorizontalStrut(80));
-        XBox2.add(label2);
-        XBox2.add(field2);
+        XBox2.add(XBox4);
         XBox2.add(Box.createHorizontalStrut(80));
 
         Box XBox3 = Box.createHorizontalBox();
@@ -67,11 +74,16 @@ class SettingsDialog extends JDialog {
         YBox.add(Box.createVerticalStrut(20));
         YBox.add(XBox3);
 
-        yes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SettingsDialog.this.setVisible(false);
+        yes.addActionListener(e -> {
+            log.addLog("按下了：设置提示框确认按钮。");
+            if (hotKey) {
+                JOptionPane.showMessageDialog(this, "重启后热键生效。");
+                hotKey = false;
             }
+            SettingsDialog.this.setVisible(false);
+            PenguinLive.settings.setSettings("screenShot", field1.getText());
+            PenguinLive.settings.setSettings("hotKey", String.valueOf(codey));
+            PenguinLive.settings.writeAll();
         });
 
         mainPanel.add(YBox);
@@ -79,15 +91,23 @@ class SettingsDialog extends JDialog {
         field2.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                int code = e.getKeyCode();
-                String key = KeyEvent.getKeyText(code);
-                System.out.println(key);
-                field2.setText(key);
+                field2.setText("");
             }
             public void keyReleased(KeyEvent e) {
                 int code = e.getKeyCode();
                 String key = KeyEvent.getKeyText(code);
                 field2.setText(key);
+                codey = code;
+                hotKey = true;
+                log.addLog("热键为：" + key);
+            }
+        });
+        fileButton.addActionListener(e -> {
+            log.addLog("创建文件选择面板。");
+            int returnV = jFileChooserX.showOpenDialog(SettingsDialog.this);
+            if (returnV == JFileChooserX.APPROVE_OPTION) {
+                File file = jFileChooserX.getSelectedFile();
+                field1.setText(file.getPath());
             }
         });
 

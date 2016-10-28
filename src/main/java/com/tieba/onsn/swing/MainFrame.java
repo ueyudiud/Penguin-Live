@@ -1,12 +1,12 @@
 package com.tieba.onsn.swing;
 
+import com.melloware.jintellitype.JIntellitype;
 import com.tieba.onsn.PenguinLive;
-
+import static com.tieba.onsn.PenguinLive.log;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -15,30 +15,25 @@ import java.net.URL;
  * @author OnSN
  */
 public class MainFrame extends JFrame {
-    public JPanel downPanel = new JPanel(new BorderLayout());
-    public JPanel sendPanel = new JPanel(new BorderLayout());
-    public JTextArea textArea = new JTextArea();
-    public JButtonX sendButton = new JButtonX("发送");
-    public JPanel upPanel = new JPanel(new BorderLayout());
-    public ImgPanel imgPanel = new ImgPanel();
-    private Box buttons = Box.createVerticalBox();
-    private JPanel emptyPanel = new JPanel();
-    private JButtonX tiebaButton = new JButtonX(new ImageIcon(PenguinLive.class.getResource("/Tieba.png")));
-    private JButtonX settingsButton = new JButtonX(new ImageIcon(PenguinLive.class.getResource("/Settings.png")));
-    public TiebaDialog tiebaDialog = new TiebaDialog(this);
-    public SettingsDialog settingsDialog = new SettingsDialog(this);
+    private JTextArea textArea = new JTextArea();
+    private TiebaDialog tiebaDialog = new TiebaDialog(this);
+    private SettingsDialog settingsDialog = new SettingsDialog(this);
 
-    public MainFrame () {
+    public MainFrame () throws IOException {
         super("Penguin Live");
+        log.addLog("创建主面板中...");
         setSize(550, 650);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         //--------------------
 
+        log.addLog("创建主面板：创建组件中...");
+        JPanel downPanel = new JPanel(new BorderLayout());
         downPanel.setBorder(new EmptyBorder(0, 50, 0, 50));
         downPanel.setPreferredSize(new Dimension(450, 300));
         downPanel.setOpaque(false);
+        JPanel sendPanel = new JPanel(new BorderLayout());
         sendPanel.setBorder(new EmptyBorder(25, 25, 25, 25));
         textArea.setPreferredSize(new Dimension(450, 200));
         textArea.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -46,6 +41,7 @@ public class MainFrame extends JFrame {
         textArea.setLineWrap(true);
         textArea.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 
+        JButtonX sendButton = new JButtonX("发送");
         sendButton.setPreferredSize(new Dimension(100, 50));
         sendButton.setFont(new Font("微软雅黑", Font.BOLD, 20));
 
@@ -57,15 +53,20 @@ public class MainFrame extends JFrame {
 
         //---------------------
 
+        JPanel upPanel = new JPanel(new BorderLayout());
         upPanel.setBorder(new EmptyBorder(50, 0, 25, 0));
         upPanel.setPreferredSize(new Dimension(400, 300));
         upPanel.setOpaque(false);
 
+        ImgPanel imgPanel = new ImgPanel();
         imgPanel.setPreferredSize(new Dimension(400, 225));
+        JPanel emptyPanel = new JPanel();
         emptyPanel.setPreferredSize(new Dimension(50, 0));
         emptyPanel.setOpaque(false);
 
+        JButtonX tiebaButton = new JButtonX(new ImageIcon(PenguinLive.class.getResource("/Tieba.png")));
         tiebaButton.setPreferredSize(new Dimension(100, 100));
+        JButtonX settingsButton = new JButtonX(new ImageIcon(PenguinLive.class.getResource("/Settings.png")));
         settingsButton.setPreferredSize(new Dimension(100, 100));
         tiebaButton.setBorder(null);
         settingsButton.setBorder(null);
@@ -77,6 +78,7 @@ public class MainFrame extends JFrame {
         tiebaButton.setRolloverIcon(new ImageIcon(PenguinLive.class.getResource("/Tieba_put.png")));
         settingsButton.setRolloverIcon(new ImageIcon(PenguinLive.class.getResource("/Settings_put.png")));
 
+        Box buttons = Box.createVerticalBox();
         buttons.setPreferredSize(new Dimension(100, 100));
         buttons.setBorder(new EmptyBorder(5, 25, 5, 25));
 
@@ -95,23 +97,41 @@ public class MainFrame extends JFrame {
 
         //---------------------
 
-        sendButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String s = textArea.getText().replaceAll("\n", " [br] ");
-                System.out.println(s);
-                textArea.setText(null);
-            }
+        sendButton.addActionListener(e -> {
+            String s = textArea.getText().replaceAll("\n", " [br] ");
+            textArea.setText(null);
+            log.addLog("将要发出：" + s);
+        });
+        tiebaButton.addActionListener(e -> {
+            log.addLog("贴吧提示框...");
+            tiebaDialog.setVisible(true);
+        });
+        settingsButton.addActionListener((e) -> {
+            log.addLog("设置提示框...");
+            settingsDialog.setVisible(true);
+
         });
 
-        tiebaButton.addActionListener(e -> tiebaDialog.setVisible(true));
-        settingsButton.addActionListener((e) -> settingsDialog.setVisible(true));
+        JIntellitype.getInstance().registerHotKey(0, 0, Integer.parseInt(PenguinLive.settings.getSettings("hotKey")));
+        JIntellitype.getInstance().addHotKeyListener(identifier -> {
+            log.addLog("触发了：全局热键。");
+            if (identifier == 0) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                MainFrame.this.setState(NORMAL);
+                MainFrame.this.setLocationRelativeTo(null);
+                MainFrame.this.setVisible(true);
 
+            }
+        });
+        log.addLog("创建主面板完毕。");
     }
-
-    public class ImgPanel extends JPanel {
+    private class ImgPanel extends JPanel {
         Image img;
-        public ImgPanel () {
+        ImgPanel() {
             super();
         }
         public void paint (Graphics g) {
