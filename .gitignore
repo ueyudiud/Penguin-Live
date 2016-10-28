@@ -1,3 +1,9 @@
 # build
 build
 *.class
+bin
+eclipse
+run
+log
+.gradle
+ui
