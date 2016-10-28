@@ -9,14 +9,14 @@ import java.io.File;
  *
  * @author OnSN
  */
-public class JFileChooserX extends JFileChooser {
+class JFileChooserX extends JFileChooser {
     /**
      * Constructs a <code>JFileChooser</code> pointing to the user's
      * default directory. This default depends on the operating system.
      * It is typically the "My Documents" folder on Windows, and the
      * user's home directory on Unix.
      */
-    public JFileChooserX () {
+    JFileChooserX() {
         this((File) null, (FileSystemView) null);
     }
 

@@ -83,4 +83,10 @@ public class Settings {
             settings.put(key, value);
         }
     }
+    public String getSettings (String key) {
+        if (key.equals("BDUSS") || key.equals("page") || key.equals("screenShot") || key.equals("hotKey")) {
+            return settings.get(key);
+        }
+        return null;
+    }
 }

@@ -16,6 +16,7 @@ import java.io.File;
  */
 class SettingsDialog extends JDialog {
     private int codey = 113;
+    private boolean hotKey = false;
     SettingsDialog(JFrame owner) {
         super(owner, "登录");
         setSize(450, 250);
@@ -72,6 +73,10 @@ class SettingsDialog extends JDialog {
         YBox.add(XBox3);
 
         yes.addActionListener(e -> {
+            if (hotKey) {
+                JOptionPane.showMessageDialog(this, "重启后热键生效。");
+                hotKey = false;
+            }
             SettingsDialog.this.setVisible(false);
             PenguinLive.settings.setSettings("screenShot", field1.getText());
             PenguinLive.settings.setSettings("hotKey", String.valueOf(codey));
@@ -90,7 +95,7 @@ class SettingsDialog extends JDialog {
                 String key = KeyEvent.getKeyText(code);
                 field2.setText(key);
                 codey = code;
-                MainFrame.hotKey = code;
+                hotKey = true;
             }
         });
         fileButton.addActionListener(e -> {

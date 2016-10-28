@@ -15,7 +15,6 @@ import java.net.URL;
  * @author OnSN
  */
 public class MainFrame extends JFrame {
-    static int hotKey = 113;
     private JTextArea textArea = new JTextArea();
     private TiebaDialog tiebaDialog = new TiebaDialog(this);
     private SettingsDialog settingsDialog = new SettingsDialog(this);
@@ -104,9 +103,14 @@ public class MainFrame extends JFrame {
         tiebaButton.addActionListener(e -> tiebaDialog.setVisible(true));
         settingsButton.addActionListener((e) -> settingsDialog.setVisible(true));
 
-        JIntellitype.getInstance().registerHotKey(0, 0, MainFrame.hotKey);
+        JIntellitype.getInstance().registerHotKey(0, 0, Integer.parseInt(PenguinLive.settings.getSettings("hotKey")));
         JIntellitype.getInstance().addHotKeyListener(identifier -> {
             if (identifier == 0) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 MainFrame.this.setState(NORMAL);
                 MainFrame.this.setLocationRelativeTo(null);
                 MainFrame.this.setVisible(true);

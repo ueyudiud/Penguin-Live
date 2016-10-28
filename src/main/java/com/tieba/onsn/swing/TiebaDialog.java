@@ -56,7 +56,12 @@ class TiebaDialog extends JDialog {
         YBox.add(Box.createVerticalStrut(20));
         YBox.add(XBox3);
 
-        yes.addActionListener(e -> TiebaDialog.this.setVisible(false));
+        yes.addActionListener(e -> {
+            TiebaDialog.this.setVisible(false);
+            PenguinLive.settings.setSettings("BDUSS", field1.getText());
+            PenguinLive.settings.setSettings("page", field2.getText());
+            PenguinLive.settings.writeAll();
+        });
 
         mainPanel.add(YBox);
 

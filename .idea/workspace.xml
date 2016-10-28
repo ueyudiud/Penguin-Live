@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java" line="40" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java" line="39" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb81b3f9-47a0-42b6-b3b5-022e58e23085" name="Default" comment="">
+    <list default="true" id="eb81b3f9-47a0-42b6-b3b5-022e58e23085" name="Default" comment="#4：设置部分完善。">
       <change type="DELETED" beforePath="$PROJECT_DIR$/settings.ini" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Cinema3D.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Cinema3D.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/io/annotations.xml" afterPath="$PROJECT_DIR$/java/io/annotations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/PenguinLive.java" afterPath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/PenguinLive.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/Settings.java" afterPath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/Settings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JFileChooserX.java" afterPath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JFileChooserX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java" afterPath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/SettingsDialog.java" afterPath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/SettingsDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/TiebaDialog.java" afterPath="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/TiebaDialog.java" />
     </list>
     <ignored path="PENGUIN-Live.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -421,17 +420,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/BasicButtonUIx.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/Post.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JButtonX.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JFileChooserX.java" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/TiebaDialog.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/TestSettings.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/PenguinLive.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/SettingsDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JFileChooserX.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/Settings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/TiebaDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/SettingsDialog.java" />
         <option value="$PROJECT_DIR$/settings.ini" />
       </list>
     </option>
@@ -1080,7 +1079,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477611395518</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="#4：设置部分完善。">
+      <created>1477647226694</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1477647226694</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1138,7 +1144,8 @@
     <MESSAGE value="#2：热键系统基本完善。" />
     <MESSAGE value="#3：先把全部东西上传上去吧。" />
     <MESSAGE value="#4：制作设置部分中..." />
-    <option name="LAST_COMMIT_MESSAGE" value="#4：制作设置部分中..." />
+    <MESSAGE value="#4：设置部分完善。" />
+    <option name="LAST_COMMIT_MESSAGE" value="#4：设置部分完善。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1252,6 +1259,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1391,16 +1399,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JButtonX.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-          <folding>
-            <element signature="docComment;class#JButtonX#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1420,30 +1418,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JFileChooserX.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="76" column="47" selection-start-line="76" selection-start-column="47" selection-end-line="76" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/jintellitype-1.3.9.jar!/com/melloware/jintellitype/HotkeyListener.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#ImgPanel#0;class#MainFrame#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1487,8 +1466,8 @@
         <state relative-caret-position="378">
           <caret line="1005" column="19" selection-start-line="1005" selection-start-column="19" selection-end-line="1005" selection-end-column="19" />
           <folding>
-            <element signature="docComment;method#createNewFile#0;class#File#0" expanded="true" />
-            <element signature="method#createNewFile#0;class#File#0" expanded="true" />
+            <element signature="docComment;method#createNewFile#0;class#File#0" expanded="false" />
+            <element signature="method#createNewFile#0;class#File#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1501,41 +1480,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/PenguinLive.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#PenguinLive#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/TiebaDialog.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JButtonX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+        <state relative-caret-position="68">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/JFileChooserX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#510#511#0" expanded="true" />
+            <element signature="e#566#567#0" expanded="true" />
+            <element signature="method#JFileChooserX#5;class#JFileChooserX#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="111" column="35" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#ImgPanel#0;class#MainFrame#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="79" column="7" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#setSettings#0;class#Settings#0" expanded="true" />
+            <element signature="method#getSettings#0;class#Settings#0" expanded="true" />
+            <marker date="1477648626729" expanded="false" signature="406:898" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/SettingsDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="77" column="44" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
+        <state relative-caret-position="257">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1477647071420" expanded="false" signature="2980:3250" ph="{...}" />
+            <element signature="class#2692:3098" expanded="false" />
+            <marker date="1477650303759" expanded="false" signature="3143:3413" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/Post.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1547,15 +1562,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/Settings.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tieba/onsn/swing/TiebaDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        <state relative-caret-position="85">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#setSettings#0;class#Settings#0" expanded="true" />
-            <element signature="method#setSettings#0;class#Settings#0" expanded="true" />
-            <marker date="1477647169483" expanded="false" signature="406:898" ph="{...}" />
+            <element signature="method#TiebaDialog#0;class#TiebaDialog#0" expanded="true" />
           </folding>
         </state>
       </provider>
