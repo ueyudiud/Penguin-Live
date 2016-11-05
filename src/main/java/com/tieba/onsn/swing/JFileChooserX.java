@@ -3,7 +3,6 @@ package com.tieba.onsn.swing;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
-import static com.tieba.onsn.PenguinLive.log;
 
 /**
  * Created by Onsn on 2016/10/27.
@@ -32,7 +31,7 @@ class JFileChooserX extends JFileChooser {
      * @param currentDirectoryPath  a <code>String</code> giving the path
      *                          to a file or directory
      */
-    public JFileChooserX (String currentDirectoryPath) {
+    public JFileChooserX(String currentDirectoryPath) {
         this(currentDirectoryPath, (FileSystemView) null);
     }
 
@@ -47,7 +46,7 @@ class JFileChooserX extends JFileChooser {
      * @param currentDirectory  a <code>File</code> object specifying
      *                          the path to a file or directory
      */
-    public JFileChooserX (File currentDirectory) {
+    public JFileChooserX(File currentDirectory) {
         this(currentDirectory, (FileSystemView) null);
     }
 
@@ -55,16 +54,15 @@ class JFileChooserX extends JFileChooser {
      * Constructs a <code>JFileChooser</code> using the given
      * <code>FileSystemView</code>.
      */
-    public JFileChooserX (FileSystemView fsv) {
+    public JFileChooserX(FileSystemView fsv) {
         this((File) null, fsv);
     }
-
 
     /**
      * Constructs a <code>JFileChooser</code> using the given current directory
      * and <code>FileSystemView</code>.
      */
-    public JFileChooserX (File currentDirectory, FileSystemView fsv) {
+    public JFileChooserX(File currentDirectory, FileSystemView fsv) {
         super(currentDirectory, fsv);
         setFileSelectionMode(DIRECTORIES_ONLY);
     }
@@ -73,7 +71,7 @@ class JFileChooserX extends JFileChooser {
      * Constructs a <code>JFileChooser</code> using the given current directory
      * path and <code>FileSystemView</code>.
      */
-    public JFileChooserX (String currentDirectoryPath, FileSystemView fsv) {
+    public JFileChooserX(String currentDirectoryPath, FileSystemView fsv) {
         super(currentDirectoryPath, fsv);
         setFileSelectionMode(DIRECTORIES_ONLY);
     }

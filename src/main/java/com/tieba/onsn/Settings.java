@@ -3,7 +3,6 @@ package com.tieba.onsn;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import static com.tieba.onsn.PenguinLive.log;
 
 /**
  * Created by Onsn on 2016/10/27.
@@ -12,65 +11,79 @@ import static com.tieba.onsn.PenguinLive.log;
  */
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class Settings {
-    private Map<String, String> settings = new HashMap<>();
+    public static final Settings settings = new Settings();
+    private Map<String, String> stringHashMap = new HashMap<>();
     private File settingsINI = new File("settings.ini");
 
-    Settings () {
-        log.addLog("读取设置中...");
-        if (!settingsINI.isFile()) {
+    Settings() {
+        if (!settingsINI.isFile())
             try {
-                settingsINI.createNewFile();
-                try (BufferedWriter bw = getWriter()) {
-                    if (bw != null) {
-                        bw.write("BDUSS = \n" +
-                                "page = \n" +
-                                "screenShot = \n" +
-                                "hotKey = 113");
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            boolean success = settingsINI.createNewFile();
+            if (!success) {
+                throw new IOException();
             }
+            try (BufferedWriter bw = getWriter()) {
+                if (bw != null) {
+                    bw.write("BDUSS=\n" +
+                            "page=\n" +
+                            "screenShot=\n" +
+                            "hotKey=113");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         readAll();
-        log.addLog("读取设置完毕。");
+        settingCorrect();
     }
-    private BufferedWriter getWriter () {
+    private void settingCorrect() {
+        readAll();
+        if (!new File(getSettings("screenShot")).isDirectory()) {
+            setSettings("screenShot", "");
+        }
+        writeAll();
+    }
+
+    private BufferedWriter getWriter() {
         try {
-            return new BufferedWriter(new FileWriter(settingsINI));
+            return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(settingsINI), "utf-8"));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
-    private BufferedReader getReader () {
+    private BufferedReader getReader() {
         try {
-            return new BufferedReader(new FileReader(settingsINI));
-        } catch (FileNotFoundException e) {
+            return new BufferedReader(new InputStreamReader(new FileInputStream(settingsINI), "utf-8"));
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
-    public void readAll () {
+    public void readAll() {
         String tmp1;
         try (BufferedReader br = getReader()) {
             if (br != null) {
                 while ((tmp1 = br.readLine()) != null) {
                     String[] tmp2 = tmp1.split("=");
-                    settings.put(tmp2[0].replace(" ", ""), tmp2[1].replace(" ", ""));
+                    if (tmp2.length == 1) {
+                        stringHashMap.put(tmp2[0].replace(" ", ""), "");
+                    } else {
+                        stringHashMap.put(tmp2[0].replace(" ", ""), tmp2[1].replace(" ", ""));
+                    }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void writeAll () {
+    public void writeAll() {
         try (BufferedWriter bw = getWriter()) {
             if (bw != null) {
-                bw.write("BDUSS = " + settings.get("BDUSS") +
-                        "\npage = " + settings.get("page") +
-                        "\nscreenShot = " + settings.get("screenShot") +
-                        "\nhotKey = " + settings.get("hotKey"));
+                bw.write("BDUSS = " + stringHashMap.get("BDUSS") +
+                        "\npage = " + stringHashMap.get("page") +
+                        "\nscreenShot = " + stringHashMap.get("screenShot") +
+                        "\nhotKey = " + stringHashMap.get("hotKey"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,12 +96,12 @@ public class Settings {
      */
     public void setSettings (String key, String value) {
         if (key.equals("BDUSS") || key.equals("page") || key.equals("screenShot") || key.equals("hotKey")) {
-            settings.put(key, value);
+            stringHashMap.put(key, value);
         }
     }
     public String getSettings (String key) {
         if (key.equals("BDUSS") || key.equals("page") || key.equals("screenShot") || key.equals("hotKey")) {
-            return settings.get(key);
+            return stringHashMap.get(key);
         }
         return null;
     }

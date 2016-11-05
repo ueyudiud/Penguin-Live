@@ -1,13 +1,11 @@
 package com.tieba.onsn.swing;
 
-import com.tieba.onsn.PenguinLive;
 
-import static com.tieba.onsn.PenguinLive.log;
+import com.tieba.onsn.Settings;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Onsn on 2016/10/25.
@@ -17,59 +15,56 @@ import java.awt.event.ActionListener;
 class TiebaDialog extends JDialog {
 
     TiebaDialog(JFrame owner) {
+        //Init Tieba Dialog.
         super(owner, "登录");
-        log.addLog("创建贴吧提示框中...");
         setSize(450, 250);
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBorder(new EmptyBorder(25, 25, 25, 25));
         setModal(true);
 
-
+        //Create new Components.
+        JPanel mainPanel = new JPanel();
         String[] names = new String[]{"BDUSS: ", "帖子地址: "};
         JLabel label1 = new JLabel(names[0]);
         JLabel label2 = new JLabel(names[1]);
-
         JTextField field1 = new JTextField(21);
         JTextField field2 = new JTextField(21);
-
-        label1.setFont(PenguinLive.YaHei);
-        label2.setFont(PenguinLive.YaHei);
-        field1.setFont(PenguinLive.YaHei);
-        field2.setFont(PenguinLive.YaHei);
-
         JButtonX yes = new JButtonX("确定");
-        yes.setPreferredSize(new Dimension(200, 100));
 
+        //Init Components.
+        mainPanel.setBorder(new EmptyBorder(25, 25, 25, 25));
+        label1.setFont(MainFrame.YaHei);
+        label2.setFont(MainFrame.YaHei);
+        field1.setFont(MainFrame.YaHei);
+        field2.setFont(MainFrame.YaHei);
+        yes.setPreferredSize(new Dimension(200, 100));
+        field1.setText(Settings.settings.getSettings("BDUSS"));
+        field2.setText(Settings.settings.getSettings("page"));
+
+        //Add Components on Boxes and JPanel.
         Box xBox1 = Box.createHorizontalBox();
         xBox1.add(label1);
         xBox1.add(field1);
-
         Box XBox2 = Box.createHorizontalBox();
         XBox2.add(label2);
         XBox2.add(field2);
-
         Box XBox3 = Box.createHorizontalBox();
         XBox3.add(yes);
-
         Box YBox = Box.createVerticalBox();
         YBox.add(xBox1);
         YBox.add(Box.createVerticalStrut(20));
         YBox.add(XBox2);
         YBox.add(Box.createVerticalStrut(20));
         YBox.add(XBox3);
+        mainPanel.add(YBox);
+        getContentPane().add(mainPanel);
 
+        //Add Action Listener.
         yes.addActionListener(e -> {
-            log.addLog("按下了：贴吧提示框确认按钮。");
             TiebaDialog.this.setVisible(false);
-            PenguinLive.settings.setSettings("BDUSS", field1.getText());
-            PenguinLive.settings.setSettings("page", field2.getText());
-            PenguinLive.settings.writeAll();
+            Settings.settings.setSettings("BDUSS", field1.getText());
+            Settings.settings.setSettings("page", field2.getText());
+            Settings.settings.writeAll();
         });
 
-        mainPanel.add(YBox);
 
-        getContentPane().add(mainPanel);
-        log.addLog("创建贴吧提示框完毕。");
     }
 }
