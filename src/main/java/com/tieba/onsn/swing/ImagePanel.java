@@ -15,7 +15,7 @@ import java.net.URL;
  * @author OnSN
  */
 class ImagePanel extends JPanel {
-    private URL imageFile;
+    public URL imageFile;
 
     ImagePanel() {
         super();

@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -135,7 +136,7 @@ public class MainFrame extends JFrame {
             String text = textArea.getText().replaceAll("\n", " [br] ");
             Thread.sleep(1000);
             if (!Settings.settings.getSettings("page").equals("") && !Settings.settings.getSettings("BDUSS").equals("")) {
-            post = new Post(text, Settings.settings.getSettings("page"), Settings.settings.getSettings("BDUSS"));
+            post = new Post(text, Settings.settings.getSettings("page"), Settings.settings.getSettings("BDUSS"), new File(imagePanel.imageFile.toURI()));
             } else {
                 JOptionPane.showMessageDialog(this, "你没有指定BDUSS与帖子地址！", "警告", JOptionPane.WARNING_MESSAGE);
                 return;

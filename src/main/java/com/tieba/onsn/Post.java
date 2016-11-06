@@ -8,9 +8,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
@@ -31,14 +36,16 @@ import java.util.Locale;
  */
 public class Post implements Runnable {
     private CookieStore cookieStore = new BasicCookieStore();
+    private File image;
     private String bduss;
     private String contents;
     private String URL;
 
-    public Post (String contents, String tieURL, String bduss) {
+    public Post (String contents, String tieURL, String bduss, File image) {
         this.contents = contents;
         this.bduss = bduss;
         this.URL = tieURL;
+        this.image = image;
     }
     private void postContents() {
         HttpResponse httpResponse;
@@ -64,6 +71,12 @@ public class Post implements Runnable {
             Log.log.addLog("tbs is: " + tbs);
         }
 
+        String imageResult = postImage(this.image);
+        String image = new Regex(imageResult, "pic_water\":\"(.*?.jpg)\"").group(1).replaceAll("\\\\", "");
+        String type = new Regex(imageResult, "\"pic_type\":(.)").group(1);
+        String width = Integer.valueOf(new Regex(imageResult, "\"fullpic_width\":(.*?),").group(1)) >= 560 ? "560" : new Regex(imageResult, "\"fullpic_width\":(.*?),").group(1);
+        String height = Integer.valueOf(new Regex(imageResult, "\"fullpic_height\":(.*?),").group(1)) >= 308 ? "308" : new Regex(imageResult, "\"fullpic_height\":(.*?),").group(1);
+
         List<NameValuePair> params = new ArrayList<>();
         {
             params.add(new BasicNameValuePair("ie", "utf-8"));
@@ -75,7 +88,7 @@ public class Post implements Runnable {
             params.add(new BasicNameValuePair("rich_text", "1"));
             params.add(new BasicNameValuePair("tbs", tbs));
             Log.log.addLog("Content is: " + contents);
-            params.add(new BasicNameValuePair("content", contents));
+            params.add(new BasicNameValuePair("content", "[img pic_type="+type+" width="+width+" height="+height+"]"+image+"[/img]" + "[br]" + contents));
             params.add(new BasicNameValuePair("files", "%5B%5D"));
             params.add(new BasicNameValuePair("mouse_pwd", "109%2C103%2C120%2C96%2C103%2C101%2C103%2C93%2C101%2C120%2C100%2C120%2C101%2C120%2C100%2C120%2C101%2C120%2C100%2C120%2C101%2C120%2C100%2C120%2C101%2C120%2C100%2C93%2C101%2C98%2C101%2C100%2C98%2C93%2C101%2C109%2C102%2C100%2C120%2C101%2C100%2C108%2C100%2C14772177721840"));
             params.add(new BasicNameValuePair("mouse_pwd_t", "1477217772184"));
@@ -179,164 +192,45 @@ public class Post implements Runnable {
         }
     }
 
-    private HttpResponse postImage(File imageFile) {
-        FileOutputStream fileOutputStream;
-        String name;
+    private String postImage(File imageFile) {
+        HttpClient httpClient;
+        String result = null;
+        HttpResponse httpResponse = null;
         try {
-            if (!imageFile.isFile()) {
-                throw new Exception("It is not a imageFile file.");
-            }
-            if (imageFile != null && imageFile.exists()) {
-                BufferedImage image = ImageIO.read(imageFile);
-                if (image != null) {
-                    BufferedImage tagImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-                    tagImage.getGraphics().drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
-                    name = imageFile.getName();
-                }
-            }
-        } catch (Exception e) {
+            httpClient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost("http://upload.tieba.baidu.com/upload/pic?tbs=5b3aefb18a0b594b014784231450125500_1&fid=304736&save_yun_album=1");
+            httpPost.addHeader("Cookie", "TIEBA_USERTYPE=8e3276f7e65b63f120f52155; b" +
+                    "dshare_firstime=1463635022332; " +
+                    "PSTM=1466347841; BIDUPSID=BA39DB75B2AC259ADFC3D8C9F92DE9A9; " +
+                    "rpln_guide=1; IS_NEW_USER=57f1b4eb5becbf60d194a2f8; " +
+                    "BAIDUID=3EE749D301BD2B7442573F1562EDD8E9:FG=1; " +
+                    "Hm_lvt_287705c8d9e2073d13275b18dbd746dc=1477132437,1477132561,1477133113,1477184326; " +
+                    "BDUSS=" + bduss + "; " +
+                    "TIEBAUID=251e382d4053b3698f036ce3; " +
+                    "PSINO=6; " +
+                    "H_PS_PSSID=21233_1465_21102_20239_21407_21378_21193_21373_21307; " +
+                    "wise_device=0; " +
+                    "LONGID=339081636");
+
+            FileBody fileBody = new FileBody(imageFile);
+
+            HttpEntity requestEntity = MultipartEntityBuilder.create()
+                    .addPart("file", fileBody)
+                    .build();
+
+            httpPost.setEntity(requestEntity);
+            httpResponse = httpClient.execute(httpPost);
+
+            result = sourceGet(httpResponse.getEntity(), -1);
+            Log.log.addLog("Image Post result: " + result);
+        } catch (IOException e) {
             e.printStackTrace();
-            System.exit(2);
         }
-        return new HttpResponse() {
-            @Override
-            public StatusLine getStatusLine() {
-                return null;
-            }
-
-            @Override
-            public void setStatusLine(StatusLine statusLine) {
-
-            }
-
-            @Override
-            public void setStatusLine(ProtocolVersion protocolVersion, int i) {
-
-            }
-
-            @Override
-            public void setStatusLine(ProtocolVersion protocolVersion, int i, String s) {
-
-            }
-
-            @Override
-            public void setStatusCode(int i) throws IllegalStateException {
-
-            }
-
-            @Override
-            public void setReasonPhrase(String s) throws IllegalStateException {
-
-            }
-
-            @Override
-            public HttpEntity getEntity() {
-                return null;
-            }
-
-            @Override
-            public void setEntity(HttpEntity httpEntity) {
-
-            }
-
-            @Override
-            public Locale getLocale() {
-                return null;
-            }
-
-            @Override
-            public void setLocale(Locale locale) {
-
-            }
-
-            @Override
-            public ProtocolVersion getProtocolVersion() {
-                return null;
-            }
-
-            @Override
-            public boolean containsHeader(String s) {
-                return false;
-            }
-
-            @Override
-            public Header[] getHeaders(String s) {
-                return new Header[0];
-            }
-
-            @Override
-            public Header getFirstHeader(String s) {
-                return null;
-            }
-
-            @Override
-            public Header getLastHeader(String s) {
-                return null;
-            }
-
-            @Override
-            public Header[] getAllHeaders() {
-                return new Header[0];
-            }
-
-            @Override
-            public void addHeader(Header header) {
-
-            }
-
-            @Override
-            public void addHeader(String s, String s1) {
-
-            }
-
-            @Override
-            public void setHeader(Header header) {
-
-            }
-
-            @Override
-            public void setHeader(String s, String s1) {
-
-            }
-
-            @Override
-            public void setHeaders(Header[] headers) {
-
-            }
-
-            @Override
-            public void removeHeader(Header header) {
-
-            }
-
-            @Override
-            public void removeHeaders(String s) {
-
-            }
-
-            @Override
-            public HeaderIterator headerIterator() {
-                return null;
-            }
-
-            @Override
-            public HeaderIterator headerIterator(String s) {
-                return null;
-            }
-
-            @Override
-            public HttpParams getParams() {
-                return null;
-            }
-
-            @Override
-            public void setParams(HttpParams httpParams) {
-
-            }
-        };
+        return result;
     }
 
     public void run() {
         postContents();
     }
+
 }
