@@ -1,15 +1,14 @@
 package com.tieba.onsn.swing;
 
 import com.melloware.jintellitype.JIntellitype;
-import com.tieba.onsn.Log;
-import com.tieba.onsn.PenguinLive;
-import com.tieba.onsn.Settings;
+import com.tieba.onsn.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 /**
  * Created by Onsn on 2016/10/29.
@@ -18,7 +17,8 @@ import java.awt.event.KeyEvent;
  */
 @SuppressWarnings("FieldCanBeLocal")
 public class MainFrame extends JFrame {
-    public static final Font YaHei = new Font("微软雅黑", Font.BOLD, 15);
+    static final Font YaHei = new Font("微软雅黑", Font.BOLD, 15);
+    private static Post post;
     private JIntellitype jIntellitype = JIntellitype.getInstance();
     private JTextArea textArea = new JTextArea();
     private TiebaDialog tiebaDialog = new TiebaDialog(this);
@@ -131,8 +131,20 @@ public class MainFrame extends JFrame {
         imagePanel.setFile();
     }
     private void send() {
-        String text = textArea.getText().replaceAll("\n", " [br] ");
-        textArea.setText(null);
-        Log.log.addLog("Send: \"" + text + "\"");
+        try {
+            String text = textArea.getText().replaceAll("\n", " [br] ");
+            Thread.sleep(1000);
+            if (!Settings.settings.getSettings("page").equals("") && !Settings.settings.getSettings("BDUSS").equals("")) {
+            post = new Post(text, Settings.settings.getSettings("page"), Settings.settings.getSettings("BDUSS"));
+            } else {
+                JOptionPane.showMessageDialog(this, "你没有指定BDUSS与帖子地址！", "警告", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            textArea.setText(null);
+            Log.log.addLog("Send: \"" + text + "\"");
+            new Thread(post).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -51,7 +51,7 @@ public class Log {
     }
 
     public void addLog (String log) {
-        try (BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"))) {
+        try (BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true), "utf-8"))) {
             String finalLog = getTime() + " [Log] " + log;
             br.write(finalLog + "\n");
             System.out.println(finalLog);
@@ -60,7 +60,7 @@ public class Log {
         }
     }
     public void addErr (String log) {
-        try (BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"))) {
+        try (BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true), "utf-8"))) {
             String finalLog = getTime() + " [Error] " + log;
             br.write(finalLog + "\n");
             System.err.println(finalLog);
