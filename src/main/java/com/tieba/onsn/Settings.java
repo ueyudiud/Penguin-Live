@@ -3,7 +3,7 @@ package com.tieba.onsn;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import static com.tieba.onsn.PenguinLive.log;
+import static com.tieba.onsn.PenguinLiveDebug.log;
 
 /**
  * Created by Onsn on 2016/10/27.

@@ -18,7 +18,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
-import static com.tieba.onsn.PenguinLive.log;
+import static com.tieba.onsn.PenguinLiveDebug.log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

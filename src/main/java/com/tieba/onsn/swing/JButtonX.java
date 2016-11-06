@@ -1,6 +1,6 @@
 package com.tieba.onsn.swing;
 import javax.swing.*;
-import static com.tieba.onsn.PenguinLive.log;
+import static com.tieba.onsn.PenguinLiveDebug.log;
 import java.beans.ConstructorProperties;
 
 

@@ -1,10 +1,10 @@
 package com.tieba.onsn.swing;
 
-import com.tieba.onsn.PenguinLive;
+import com.tieba.onsn.PenguinLiveDebug;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import static com.tieba.onsn.PenguinLive.log;
+import static com.tieba.onsn.PenguinLiveDebug.log;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -31,15 +31,15 @@ class SettingsDialog extends JDialog {
         JLabel label1 = new JLabel(names[1]);
         JLabel label2 = new JLabel(names[0]);
 
-        label1.setFont(PenguinLive.YaHei);
-        label2.setFont(PenguinLive.YaHei);
+        label1.setFont(PenguinLiveDebug.YaHei);
+        label2.setFont(PenguinLiveDebug.YaHei);
 
 
         JTextField field1 = new JTextField(18);
         JTextField field2 = new JTextField(2);
 
-        field1.setFont(PenguinLive.YaHei);
-        field2.setFont(PenguinLive.YaHei);
+        field1.setFont(PenguinLiveDebug.YaHei);
+        field2.setFont(PenguinLiveDebug.YaHei);
 
         JButtonX fileButton = new JButtonX("...");
         JFileChooserX jFileChooserX = new JFileChooserX();
@@ -81,9 +81,9 @@ class SettingsDialog extends JDialog {
                 hotKey = false;
             }
             SettingsDialog.this.setVisible(false);
-            PenguinLive.settings.setSettings("screenShot", field1.getText());
-            PenguinLive.settings.setSettings("hotKey", String.valueOf(codey));
-            PenguinLive.settings.writeAll();
+            PenguinLiveDebug.settings.setSettings("screenShot", field1.getText());
+            PenguinLiveDebug.settings.setSettings("hotKey", String.valueOf(codey));
+            PenguinLiveDebug.settings.writeAll();
         });
 
         mainPanel.add(YBox);

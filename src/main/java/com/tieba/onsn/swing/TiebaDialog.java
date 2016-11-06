@@ -1,8 +1,8 @@
 package com.tieba.onsn.swing;
 
-import com.tieba.onsn.PenguinLive;
+import com.tieba.onsn.PenguinLiveDebug;
 
-import static com.tieba.onsn.PenguinLive.log;
+import static com.tieba.onsn.PenguinLiveDebug.log;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -33,10 +33,10 @@ class TiebaDialog extends JDialog {
         JTextField field1 = new JTextField(21);
         JTextField field2 = new JTextField(21);
 
-        label1.setFont(PenguinLive.YaHei);
-        label2.setFont(PenguinLive.YaHei);
-        field1.setFont(PenguinLive.YaHei);
-        field2.setFont(PenguinLive.YaHei);
+        label1.setFont(PenguinLiveDebug.YaHei);
+        label2.setFont(PenguinLiveDebug.YaHei);
+        field1.setFont(PenguinLiveDebug.YaHei);
+        field2.setFont(PenguinLiveDebug.YaHei);
 
         JButtonX yes = new JButtonX("确定");
         yes.setPreferredSize(new Dimension(200, 100));
@@ -62,9 +62,9 @@ class TiebaDialog extends JDialog {
         yes.addActionListener(e -> {
             log.addLog("按下了：贴吧提示框确认按钮。");
             TiebaDialog.this.setVisible(false);
-            PenguinLive.settings.setSettings("BDUSS", field1.getText());
-            PenguinLive.settings.setSettings("page", field2.getText());
-            PenguinLive.settings.writeAll();
+            PenguinLiveDebug.settings.setSettings("BDUSS", field1.getText());
+            PenguinLiveDebug.settings.setSettings("page", field2.getText());
+            PenguinLiveDebug.settings.writeAll();
         });
 
         mainPanel.add(YBox);

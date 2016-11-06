@@ -1,8 +1,8 @@
 package com.tieba.onsn.swing;
 
 import com.melloware.jintellitype.JIntellitype;
-import com.tieba.onsn.PenguinLive;
-import static com.tieba.onsn.PenguinLive.log;
+import com.tieba.onsn.PenguinLiveDebug;
+import static com.tieba.onsn.PenguinLiveDebug.log;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -64,19 +64,19 @@ public class MainFrame extends JFrame {
         emptyPanel.setPreferredSize(new Dimension(50, 0));
         emptyPanel.setOpaque(false);
 
-        JButtonX tiebaButton = new JButtonX(new ImageIcon(PenguinLive.class.getResource("/Tieba.png")));
+        JButtonX tiebaButton = new JButtonX(new ImageIcon(PenguinLiveDebug.class.getResource("/Tieba.png")));
         tiebaButton.setPreferredSize(new Dimension(100, 100));
-        JButtonX settingsButton = new JButtonX(new ImageIcon(PenguinLive.class.getResource("/Settings.png")));
+        JButtonX settingsButton = new JButtonX(new ImageIcon(PenguinLiveDebug.class.getResource("/Settings.png")));
         settingsButton.setPreferredSize(new Dimension(100, 100));
         tiebaButton.setBorder(null);
         settingsButton.setBorder(null);
         tiebaButton.setContentAreaFilled(false);
         settingsButton.setContentAreaFilled(false);
 
-        tiebaButton.setPressedIcon(new ImageIcon(PenguinLive.class.getResource("/Tieba_press.png")));
-        settingsButton.setPressedIcon(new ImageIcon(PenguinLive.class.getResource("/Settings_press.png")));
-        tiebaButton.setRolloverIcon(new ImageIcon(PenguinLive.class.getResource("/Tieba_put.png")));
-        settingsButton.setRolloverIcon(new ImageIcon(PenguinLive.class.getResource("/Settings_put.png")));
+        tiebaButton.setPressedIcon(new ImageIcon(PenguinLiveDebug.class.getResource("/Tieba_press.png")));
+        settingsButton.setPressedIcon(new ImageIcon(PenguinLiveDebug.class.getResource("/Settings_press.png")));
+        tiebaButton.setRolloverIcon(new ImageIcon(PenguinLiveDebug.class.getResource("/Tieba_put.png")));
+        settingsButton.setRolloverIcon(new ImageIcon(PenguinLiveDebug.class.getResource("/Settings_put.png")));
 
         Box buttons = Box.createVerticalBox();
         buttons.setPreferredSize(new Dimension(100, 100));
@@ -112,7 +112,7 @@ public class MainFrame extends JFrame {
 
         });
 
-        JIntellitype.getInstance().registerHotKey(0, 0, Integer.parseInt(PenguinLive.settings.getSettings("hotKey")));
+        JIntellitype.getInstance().registerHotKey(0, 0, Integer.parseInt(PenguinLiveDebug.settings.getSettings("hotKey")));
         JIntellitype.getInstance().addHotKeyListener(identifier -> {
             log.addLog("触发了：全局热键。");
             if (identifier == 0) {
@@ -136,7 +136,7 @@ public class MainFrame extends JFrame {
         }
         public void paint (Graphics g) {
             super.paint(g);
-            URL imgUrl = PenguinLive.class.getResource("/img.png");
+            URL imgUrl = PenguinLiveDebug.class.getResource("/img.png");
             img = Toolkit.getDefaultToolkit().getImage(imgUrl);
             Graphics2D g2 = (Graphics2D) g;
             g2.drawImage(img, 0, 0, 400, 225, this);
